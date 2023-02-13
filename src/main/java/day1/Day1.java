@@ -27,17 +27,31 @@ public class Day1 {
     return elves;
   }
 
-  public static int mostCalories(String calories) {
+  private static ArrayList<Elf> getSortedElves(String calories) {
     String[] caloArray = calories.split("\n");
     ArrayList<Elf> elves = elvesOutOfCalories(caloArray);
     elves.sort(new ElfTotalCaloriesComparator());
+    return elves;
+  }
+
+  public static int mostCalories(String calories) {
+    ArrayList<Elf> elves = getSortedElves(calories);
 
     return elves.get(0).getTotalCalories();
+  }
+
+  public static int mostCaloriesOfThree(String calories) {
+    ArrayList<Elf> elves = getSortedElves(calories);
+    return elves.stream()
+        .limit(3)
+        .mapToInt(Elf::getTotalCalories)
+        .reduce(0, Integer::sum);
   }
 
   public static void main(String[] args) throws IOException {
     Path path = Path.of("src/main/resources/day1Input1");
     String content = Files.readString(path);
     System.out.println(mostCalories(content));
+    System.out.println(mostCaloriesOfThree(content));
   }
 }
