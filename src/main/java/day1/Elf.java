@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Elf implements Comparable<Elf>{
+public class Elf {
   private final List<Integer> calories;
 
   public Elf(List<Integer> calories) {
@@ -15,11 +15,6 @@ public class Elf implements Comparable<Elf>{
   public int getTotalCalories() {
     return this.calories.stream()
         .reduce(0, Integer::sum);
-  }
-
-  @Override
-  public int compareTo(Elf e) {
-    return e.getTotalCalories() - this.getTotalCalories();
   }
 
 }

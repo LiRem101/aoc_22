@@ -20,7 +20,7 @@ public class Day1 {
       }
     }
     elves.add(new Elf(calosNumeric));
-    sort(elves);
+    elves.sort(new ElfTotalCaloriesComparator());
 
     return elves.get(0).getTotalCalories();
   }
