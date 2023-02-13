@@ -3,6 +3,9 @@ package day1;
 import static java.util.Collections.sort;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +35,9 @@ public class Day1 {
     return elves.get(0).getTotalCalories();
   }
 
-  public static void main(String[] args) {
-
+  public static void main(String[] args) throws IOException {
+    Path path = Path.of("src/main/resources/day1Input1");
+    String content = Files.readString(path);
+    System.out.println(mostCalories(content));
   }
 }
