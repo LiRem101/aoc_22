@@ -9,10 +9,10 @@ import java.util.List;
 
 public class Day2 {
 
-  public static int totalScores(String[] gameChoices) {
+  public static int totalScores(String[] gameChoices, boolean partOne) {
     ArrayList<Game> games = new ArrayList<>();
     for(String choices : gameChoices) {
-      games.add(new Game(choices));
+      games.add(new Game(choices, partOne));
     }
     return games.stream()
         .mapToInt(Game::getScore)
@@ -23,6 +23,7 @@ public class Day2 {
     Path path = Path.of("src/main/resources/day2Input1");
     List<String> contentList = Files.readAllLines(path);
     String[] content = contentList.toArray(new String[0]);
-    System.out.println(totalScores(content));
+    System.out.println(totalScores(content, true));
+    System.out.println(totalScores(content, false));
   }
 }
