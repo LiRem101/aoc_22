@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 
 public class Day3Test extends TestCase {
 
-  public void testRucksackPriorityScores()
+  public void testRucksackPriorityScoresOne()
   {
     String rucksackContentsComplete = """
         vJrwpWtwJgWrhcsFMMfFFhFp
@@ -16,8 +16,22 @@ public class Day3Test extends TestCase {
         ttgJtRGJQctTZtZT
         CrZsJsPPZsGzwwsLwLmpwMDw""";
     String[] rucksackContents = rucksackContentsComplete.split("\n");
-    int result = sumPriorities(rucksackContents);
+    int result = sumPriorities(rucksackContents, true);
     assertEquals(157, result);
+  }
+
+  public void testRucksackPriorityScoresSecond()
+  {
+    String rucksackContentsComplete = """
+        vJrwpWtwJgWrhcsFMMfFFhFp
+        jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+        PmmdzqPrVvPwwTWBwg
+        wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+        ttgJtRGJQctTZtZT
+        CrZsJsPPZsGzwwsLwLmpwMDw""";
+    String[] rucksackContents = rucksackContentsComplete.split("\n");
+    int result = sumPriorities(rucksackContents, false);
+    assertEquals(70, result);
   }
 
 }
