@@ -17,7 +17,7 @@ public class Day4 {
         .toArray();
   }
 
-  public static int countContainments(String[] stringPairs) {
+  private static ArrayList<AssignmentPairs> getAssignmentPairs(String[] stringPairs) {
     List<int[]> contents = Arrays.stream(stringPairs)
         .map(Day4::divideInput)
         .toList();
@@ -25,8 +25,20 @@ public class Day4 {
     for(int[] c : contents) {
       pairs.add(new AssignmentPairs(c));
     }
+    return pairs;
+  }
+
+  public static int countContainments(String[] stringPairs) {
+    ArrayList<AssignmentPairs> pairs = getAssignmentPairs(stringPairs);
     return pairs.stream()
         .mapToInt(AssignmentPairs::howManyContain)
+        .reduce(0, Integer::sum);
+  }
+
+  public static int countOverlaps(String[] stringPairs) {
+    ArrayList<AssignmentPairs> pairs = getAssignmentPairs(stringPairs);
+    return pairs.stream()
+        .mapToInt(AssignmentPairs::howManyOverlap)
         .reduce(0, Integer::sum);
   }
 
@@ -35,5 +47,6 @@ public class Day4 {
     List<String> contentList = Files.readAllLines(path);
     String[] content = contentList.toArray(new String[0]);
     System.out.println(countContainments(content));
+    System.out.println(countOverlaps(content));
   }
 }

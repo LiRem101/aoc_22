@@ -17,6 +17,10 @@ public class AssignmentPairs {
     return startFirst >= startSecond && endFirst <= endSecond || startFirst <= startSecond && endFirst >= endSecond;
   }
 
+  private boolean overlap() {
+    return startFirst <= startSecond && startSecond <= endFirst || startSecond <= startFirst && startFirst <= endSecond;
+  }
+
   public int howManyContain() {
     if(fullyContain()) {
       return 1;
@@ -24,4 +28,13 @@ public class AssignmentPairs {
       return 0;
     }
   }
+
+  public int howManyOverlap() {
+    if(overlap()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
 }
