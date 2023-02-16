@@ -65,12 +65,33 @@ public class Day5Test extends TestCase {
     stack3.push('P');
     Stack<Character>[] stacks = new Stack[] {stack1, stack2, stack3};
     StackChanger changer = new StackChanger(stacks);
-    changer.moveStack("move 1 from 2 to 1");
-    changer.moveStack("move 3 from 1 to 3");
-    changer.moveStack("move 2 from 2 to 1");
-    changer.moveStack("move 1 from 1 to 2");
+    changer.moveStackOneATime("move 1 from 2 to 1");
+    changer.moveStackOneATime("move 3 from 1 to 3");
+    changer.moveStackOneATime("move 2 from 2 to 1");
+    changer.moveStackOneATime("move 1 from 1 to 2");
 
-    assertEquals(changer.topMessage(), "CMZ");
+    assertEquals("CMZ", changer.topMessage());
+  }
+
+  public void testChangeStacksSeveralATime()
+  {
+    Stack<Character> stack1 = new Stack<>();
+    Stack<Character> stack2 = new Stack<>();
+    Stack<Character> stack3 = new Stack<>();
+    stack1.push('Z');
+    stack1.push('N');
+    stack2.push('M');
+    stack2.push('C');
+    stack2.push('D');
+    stack3.push('P');
+    Stack<Character>[] stacks = new Stack[] {stack1, stack2, stack3};
+    StackChanger changer = new StackChanger(stacks);
+    changer.moveStackSeveralATime("move 1 from 2 to 1");
+    changer.moveStackSeveralATime("move 3 from 1 to 3");
+    changer.moveStackSeveralATime("move 2 from 2 to 1");
+    changer.moveStackSeveralATime("move 1 from 1 to 2");
+
+    assertEquals("MCD", changer.topMessage());
   }
 
   public void testFindTopMessage()
@@ -87,7 +108,7 @@ public class Day5Test extends TestCase {
         move 1 from 1 to 2
         """;
     String[] contents = contentsComplete.split("\n");
-    String result = stackTopAfterRearrangement(contents);
+    String result = stackTopAfterRearrangement(contents, true);
     assertEquals("CMZ", result);
   }
 

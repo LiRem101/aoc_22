@@ -3,7 +3,6 @@ package day5;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
@@ -19,7 +18,7 @@ public class Day5 {
     throw new IllegalArgumentException("Input has no empty line.");
   }
 
-  public static String stackTopAfterRearrangement(String[] stringInput) {
+  public static String stackTopAfterRearrangement(String[] stringInput, boolean oneAtATime) {
     int emptyLine = findEmptyLine(stringInput);
     String[] startStackStrings = Arrays.copyOfRange(stringInput, 0, emptyLine);
     String[] stackProcedureStrings = Arrays.copyOfRange(stringInput, emptyLine + 1, stringInput.length);
@@ -27,7 +26,11 @@ public class Day5 {
     Stack<Character>[] startStacks = creator.getStacks();
     StackChanger changer = new StackChanger(startStacks);
     for(String procedure : stackProcedureStrings) {
-      changer.moveStack(procedure);
+      if(oneAtATime) {
+        changer.moveStackOneATime(procedure);
+      } else {
+        changer.moveStackSeveralATime(procedure);
+      }
     }
     return changer.topMessage();
   }
@@ -36,6 +39,7 @@ public class Day5 {
     Path path = Path.of("src/main/resources/day5Input1");
     List<String> contentList = Files.readAllLines(path);
     String[] content = contentList.toArray(new String[0]);
-    System.out.println(stackTopAfterRearrangement(content));
+    System.out.println(stackTopAfterRearrangement(content, true));
+    System.out.println(stackTopAfterRearrangement(content, false));
   }
 }

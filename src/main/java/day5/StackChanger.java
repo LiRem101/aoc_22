@@ -1,6 +1,8 @@
 package day5;
 
+import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class StackChanger {
   private Stack<Character>[] stacks;
@@ -9,7 +11,7 @@ public class StackChanger {
     this.stacks = stacks;
   }
 
-  public void moveStack(String change) {
+  public void moveStackOneATime(String change) {
     String[] changes = change.split(" ");
     int numberOfSwitches = Integer.parseInt(changes[1]);
     int fromStack = Integer.parseInt(changes[3]);
@@ -18,6 +20,20 @@ public class StackChanger {
     for(int i = 0; i < numberOfSwitches; i++) {
       char a = stacks[fromStack-1].pop();
       stacks[toStack-1].push(a);
+    }
+  }
+
+  public void moveStackSeveralATime(String change) {
+    String[] changes = change.split(" ");
+    int numberOfSwitches = Integer.parseInt(changes[1]);
+    int fromStack = Integer.parseInt(changes[3]);
+    int toStack = Integer.parseInt(changes[5]);
+    Stack<Character> s = new Stack<>();
+    for(int i = 0; i < numberOfSwitches; i++) {
+      s.push(stacks[fromStack-1].pop());
+    }
+    for(int i = 0; i < numberOfSwitches; i++) {
+      stacks[toStack-1].push(s.pop());
     }
   }
 
