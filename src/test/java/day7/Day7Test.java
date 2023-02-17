@@ -4,7 +4,7 @@ import static day7.Day7.getDirectoryStructure;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 import junit.framework.TestCase;
 
 public class Day7Test extends TestCase {
@@ -38,8 +38,9 @@ public class Day7Test extends TestCase {
         """;
     String[] contents = contentsComplete.split("\n");
     Directory result = getDirectoryStructure(contents);
-    ArrayList<Directory> dirs = result.getDirs();
+    List<Directory> dirs = result.getDirs();
     assertEquals(4, dirs.size());
+    assertEquals(48381165, result.getSize());
   }
 
 }

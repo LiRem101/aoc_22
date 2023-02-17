@@ -8,7 +8,16 @@ import java.util.List;
 
 public class Day7 {
   public static Directory getDirectoryStructure(String[] dirsAsString) {
-    return null;
+    DirectoryCreator creator = new DirectoryCreator();
+    for(String console : dirsAsString) {
+      String[] c = console.split(" ");
+      if(console.charAt(0) == '$') {
+        creator.executeCommand(c);
+      } else {
+        creator.addNode(c);
+      }
+    }
+    return creator.getRoot();
   }
 
   public static void main(String[] args) throws IOException {
