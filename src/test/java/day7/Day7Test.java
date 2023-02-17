@@ -1,5 +1,6 @@
 package day7;
 
+import static day7.Day7.countSmallDirs;
 import static day7.Day7.getDirectoryStructure;
 
 
@@ -41,6 +42,38 @@ public class Day7Test extends TestCase {
     List<Directory> dirs = result.getDirs();
     assertEquals(4, dirs.size());
     assertEquals(48381165, result.getSize());
+  }
+
+  public void testCountSmallDirs()
+  {
+    String contentsComplete = """
+        $ cd /
+        $ ls
+        dir a
+        14848514 b.txt
+        8504156 c.dat
+        dir d
+        $ cd a
+        $ ls
+        dir e
+        29116 f
+        2557 g
+        62596 h.lst
+        $ cd e
+        $ ls
+        584 i
+        $ cd ..
+        $ cd ..
+        $ cd d
+        $ ls
+        4060174 j
+        8033020 d.log
+        5626152 d.ext
+        7214296 k
+        """;
+    String[] contents = contentsComplete.split("\n");
+    int result = countSmallDirs(contents);
+    assertEquals(95437, result);
   }
 
 }

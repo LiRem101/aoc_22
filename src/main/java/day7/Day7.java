@@ -20,10 +20,20 @@ public class Day7 {
     return creator.getRoot();
   }
 
+  public static int countSmallDirs(String[] dirsAsString) {
+    Directory root = getDirectoryStructure(dirsAsString);
+    List<Directory> dirs = root.getDirs();
+    return dirs.stream()
+        .mapToInt(Directory::getSize)
+        .filter(x -> x < 100000)
+        .sum();
+  }
+
   public static void main(String[] args) throws IOException {
     Path path = Path.of("src/main/resources/day7Input1");
     List<String> contentList = Files.readAllLines(path);
     String[] content = contentList.toArray(new String[0]);
+    System.out.println(countSmallDirs(content));
   }
 
 }
